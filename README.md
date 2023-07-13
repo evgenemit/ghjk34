@@ -122,4 +122,10 @@ $ sudo systemctl enable gunicorn
 $ sudo systemctl start gunicorn
 ```
 
+12. Запустите nginx:
+
+```bash
+$ sudo service nginx start
+```
+
 Теперь приложение доустпно по адресу `http://localhost/`
