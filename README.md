@@ -27,6 +27,7 @@ GRANT ALL ON SCHEMA public TO public;
 ```bash
 SECRET_KEY=example
 DEBUG=False
+HOST_1=localhost
 DB_NAME=ghjk34
 DB_USER=ghjk_user
 DB_PASSWORD=password
