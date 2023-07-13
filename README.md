@@ -40,15 +40,84 @@ $ python3 -m venv venv
 $ . venv/bin/activate
 ```
 
-5. Установите необходимые зависимости
+5. Установите необходимые зависимости:
 
 ```bash
 $ pip install -r requirements.txt
 ```
 
-6. Запустите миграции
+6. Запустите миграции:
 
 ```bash
 $ python3 manage.py migrate
 ```
 
+7. Соберите статические файлы:
+
+```bash
+$ python3 manage.py collectstatic
+```
+
+8. В каталоге `/etc/systemd/system/` создайте файлы `gunicorn.service` и `gunicorn.socket`:
+
+gunicorn.service:
+
+```bash
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/var/www/ghjk34
+ExecStart=/var/www/ghjk34/venv/bin/gunicorn --workers 5 --bind unix:/run/gunicorn.sock config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+```
+
+gunicorn.socket:
+```bash
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+```
+
+9. В каталоге `/etc/nginx/sites-available/` создайте файл `ghjk34`:
+
+```bash
+server {
+    listen 80;
+    server_name localhost;
+
+    location /static/ {
+        alias /var/www/ghjk34/staticfiles/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+```
+
+10. Создайте символическую ссылку на этот файл в каталоге `/etc/nginx/site-enabled/`:
+
+```bash
+$ sudo ln -s /etc/nginx/sites-available/ghjk34 /etc/nginx/sites-enabled/
+```
+
+11. Запустите службу gunicorn и создайте сокет:
+
+```bash
+$ sudo systemctl enable gunicorn
+$ sudo systemctl start gunicorn
+```
+
+Теперь приложение доустпно по адресу `http://localhost/`
