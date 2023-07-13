@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<p>Загрузите <b>.json</b> файл:</p>
+<form enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="d-flex flex-row">
+        <input type="file" class="form-control">
+        <button type="submit" class="btn btn-secondary">Отправить</button>
+    </div>
+    <p id="result" class="mt-2" style="display: none;">Ошибка!</p>
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'home.js' %}"></script>
+{% endblock javascript %}
