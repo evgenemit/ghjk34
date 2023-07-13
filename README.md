@@ -3,6 +3,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
+$ cd /var/www
 $ git clone https://github.com/veeedmochka/ghjk34.git
 $ cd ghjk34
 ```
