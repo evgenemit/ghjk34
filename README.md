@@ -115,7 +115,7 @@ server {
 $ sudo ln -s /etc/nginx/sites-available/ghjk34 /etc/nginx/sites-enabled/
 ```
 
-11. Запустите службу gunicorn и создайте сокет:
+11. Запустите службу gunicorn:
 
 ```bash
 $ sudo systemctl enable gunicorn
