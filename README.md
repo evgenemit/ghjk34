@@ -1,4 +1,34 @@
-## Установка и запуск
+# Установка и запуск
+
+## - Установка с Docker
+
+1. Клонируйте репозиторий:
+
+```bash
+$ git clone https://github.com/veeedmochka/ghjk34.git
+$ cd ghjk34
+```
+
+2. Создайте `.env.docker` файл с переменными окружения:
+
+```bash
+SECRET_KEY=example
+DEBUG=False
+HOST_1=localhost
+DB_NAME=ghjk34
+DB_USER=ghjk_user
+DB_PASSWORD=password
+DB_HOST=db
+DB_PORT=5432
+```
+
+3. Запустите `docker-compose`:
+
+```bash
+$ docker-compose up
+```
+
+## - Обычная установка
 
 1. Клонируйте репозиторий:
 
