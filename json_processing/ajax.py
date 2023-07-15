@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from django.http import JsonResponse
 
@@ -21,6 +22,9 @@ def handle_uploaded_file(file):
 
     try:
         file_content = file.read()
+        print(os.path.splitext(file.name))
+        if os.path.splitext(file.name)[1] != '.json':
+            return {'status': 'error', 'message': 'Неверное расширение файла.'}
         json_data = json.loads(file_content)
         for record in json_data:
             name = record.get('name', None)
