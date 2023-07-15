@@ -9,7 +9,7 @@ $ git clone https://github.com/veeedmochka/ghjk34.git
 $ cd ghjk34
 ```
 
-2. Создайте `.env.docker` файл с переменными окружения:
+2. Создайте файлы `.env` и `.env.docker` с переменными окружения:
 
 ```bash
 SECRET_KEY=example
